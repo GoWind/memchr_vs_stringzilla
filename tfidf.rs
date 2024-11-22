@@ -7,7 +7,11 @@ const LINES_PER_DOCUMENT: usize = 1000;
 
 #[derive(Debug)]
 struct TfidfCalculator {
+    // key is the term
+    // value is the number of documents in the corpus where term appears
     document_frequency: HashMap<String, usize>,
+    // If each doc in our corpus is dx 
+    // term_frequencies[dx] = frequency of each word in doc[dx]
     term_frequencies: Vec<HashMap<String, usize>>,
     n_documents: usize,
 }
@@ -49,6 +53,8 @@ impl TfidfCalculator {
         self.n_documents += 1;
     }
 
+    // For each document in the collection
+    // return the tfidf score of each word in document
     fn calculate_tfidf(&self) -> Vec<HashMap<String, f64>> {
         let mut tfidf_scores = Vec::new();
 
